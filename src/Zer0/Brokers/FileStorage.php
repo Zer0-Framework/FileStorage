@@ -20,4 +20,14 @@ class FileStorage extends Base
         $class = ClassFinder::find($config->type, $ns = ClassFinder::getNamespace(\Zer0\FileStorage\Base::class), '~');
         return new $class($config);
     }
+
+    /**
+     * @param string $name
+     * @param bool $caching
+     * @return \Zer0\FileStorage\Base
+     */
+    public function get(string $name = '', bool $caching = true): \Zer0\FileStorage\Base
+    {
+        return parent::get($name, $caching);
+    }
 }

@@ -19,8 +19,21 @@ final class Plain extends Base
     {
         $container = $this->resolveContainer($container);
         $destPath = $this->config->path . '/' . basename($container) . '/' . $dest;
-        mkdir(dirname($destPath), 0770, true);
+        $dir = dirname($destPath);
+        if (!is_dir($dir)) {
+            mkdir($dir, 0770, true);
+        }
         copy($path, $destPath);
+    }
+
+    /**
+     * @param string $container
+     * @param string $path
+     * @return string
+     */
+    public function getPath(string $container, string $path): string
+    {
+        return $this->config->path . '/' . basename($container) . '/' . $path;
     }
 
     /**
@@ -31,7 +44,7 @@ final class Plain extends Base
     public function delete(string $container, string $path): void
     {
         $container = $this->resolveContainer($container);
-        $fullPath = $this->config->path . '/' . basename($container) . '/' .  $path;
+        $fullPath = $this->config->path . '/' . basename($container) . '/' . $path;
         unlink($fullPath);
     }
 }
