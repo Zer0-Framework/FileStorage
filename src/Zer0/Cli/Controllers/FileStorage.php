@@ -26,7 +26,7 @@ final class FileStorage extends AbstractController
     public function before(): void
     {
         parent::before();
-        $this->fileStorage = $this->app->broker('FileStorage')->get();
+        $this->fileStorage = $this->app->factory('FileStorage');
     }
 
     /**
